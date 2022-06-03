@@ -17,7 +17,7 @@ crossScalaVersions := List("2.13.8")
 scalaVersion := crossScalaVersions.value.last
 
 ThisBuild / versionScheme := Some("semver-spec")
-ThisBuild / versionPolicyIntention := Compatibility.None
+ThisBuild / versionPolicyIntention := Compatibility.BinaryCompatible
 
 Compile / packageBin / packageOptions += Package.ManifestAttributes(
   "Automatic-Module-Name" -> "nl.gn0s1s.gpctree"
