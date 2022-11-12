@@ -30,6 +30,4 @@ libraryDependencies ++= Seq(
   "org.scalameta" %% "munit-scalacheck" % "0.7.29" % Test
 )
 
-testFrameworks += new TestFramework("munit.Framework")
-
 ThisBuild / turbo := true
