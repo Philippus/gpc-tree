@@ -22,6 +22,9 @@ class GpcTreeSuite extends ScalaCheckSuite {
   }
 
   property("can reconstruct a line in the taxonomy file") {
-    assertEquals(gpcTree.findNodeInTree("500105").map(gpcTree.asString), Some("500105 - Eten, drinken en tabak > Voedselitems > Specerijen en sauzen > Witte en roomsauzen"))
+    assertEquals(
+      gpcTree.findNodeInTree("500105").map(gpcTree.asString),
+      Some("500105 - Eten, drinken en tabak > Voedselitems > Specerijen en sauzen > Witte en roomsauzen")
+    )
   }
 }
