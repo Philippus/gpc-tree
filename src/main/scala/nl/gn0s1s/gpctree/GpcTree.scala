@@ -19,7 +19,7 @@ class GpcTree(source: BufferedSource) {
 
   @tailrec private def treeHugger(queue: Seq[Node], code: String, function: Node => Boolean): Option[Node] = {
     queue match {
-      case Seq() =>
+      case Seq()            =>
         None
       case Seq(hd, tl @ _*) =>
         if (function(hd))
@@ -35,15 +35,15 @@ class GpcTree(source: BufferedSource) {
   def findPathInTree(code: String): Seq[Node] = {
     @tailrec def helper(code: String, acc: Seq[Node]): Seq[Node] = {
       findParentInTree(code) match {
-        case None =>
+        case None         =>
           acc
         case Some(parent) =>
           helper(parent.placement.code, parent +: acc)
       }
     }
-    val node = findNodeInTree(code)
+    val node                                                     = findNodeInTree(code)
     node match {
-      case None =>
+      case None       =>
         Seq.empty
       case Some(node) =>
         helper(node.placement.code, Seq(node))
@@ -61,12 +61,12 @@ class GpcTree(source: BufferedSource) {
   def asString(node: Node) = {
     @tailrec def helper(nodes: Seq[Node], acc: String): String = {
       nodes match {
-        case Seq() => acc
-        case Seq(hd) => acc + hd.placement.category
+        case Seq()            => acc
+        case Seq(hd)          => acc + hd.placement.category
         case Seq(hd, tl @ _*) => helper(tl, acc + hd.placement.category + " > ")
       }
     }
-    val path = findPathInTree(node.placement.code)
+    val path                                                   = findPathInTree(node.placement.code)
     helper(path, path.lastOption.map(_.placement.code + " - ").getOrElse(""))
   }
 
@@ -75,7 +75,7 @@ class GpcTree(source: BufferedSource) {
 
     @tailrec def helper(queue: Seq[Node], acc: Seq[Node]): Seq[Node] = {
       queue match {
-        case Seq() =>
+        case Seq()            =>
           acc
         case Seq(hd, tl @ _*) =>
           val parentCode = googleProductCategories
@@ -84,11 +84,11 @@ class GpcTree(source: BufferedSource) {
               googleProductCategories.find(_._2 == leaf._2.splitAt(leaf._2.lastIndexOf(" > "))._1).map(_._1)
             )
           parentCode match {
-            case None =>
+            case None             =>
               helper(tl, acc :+ hd)
             case Some(parentCode) =>
               val parentIndex = tl.indexWhere(node => node.placement.code == parentCode)
-              val parentNode = tl(parentIndex)
+              val parentNode  = tl(parentIndex)
               helper(
                 tl.patch(
                   parentIndex,
